@@ -6,13 +6,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type RouterGroup struct {
+	*gin.RouterGroup
+}
+
 func InitRouter() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+
+	// 路由分组
+	apiGroup := r.Group("/api")
+	routerGroupApp := RouterGroup{apiGroup}
+	// 系统配置
+	routerGroupApp.SettingRouter()
+
 	return r
 }
