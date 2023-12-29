@@ -1,9 +1,10 @@
 package settings_api
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"gvb_server/models/res"
+)
 
 func (s *SettingsApi) SettingsInfoView(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "响应数据啦啦啦",
-	})
+	res.FailWithCode(res.SettingsError, c)
 }
